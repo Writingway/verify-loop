@@ -11,6 +11,10 @@ export function createTask(title: string): Task {
   return { id: nextId++, title: title.trim(), done: false };
 }
 
+export function syncNextId(tasks: Task[]): void {
+  nextId = Math.max(0, ...tasks.map((t) => t.id)) + 1;
+}
+
 export function completeTask(task: Task): Task {
   return { ...task, done: true };
 }
