@@ -28,3 +28,4 @@ avant de terminer (ex. `echo '<json>' | node script.mjs`).
 - `await` dans un callback non-async (`process.stdin.on('end', () => { await ... })`) = SyntaxError : le top-level await ne marche qu'au niveau module. Un script qui crashe au parse échoue en silence dans un hook.
 - Dans les hooks Claude Code sous Windows, préférer un chemin relatif à `$CLAUDE_PROJECT_DIR` (syntaxe POSIX, expansion non garantie selon le shell) : le cwd du hook est la racine du projet.
 - Premier plan de la persistance sur-conçu (type guard + 5 tests pour ~20 lignes) : l'utilisateur a dû demander de simplifier → règle "version minimale d'abord" ci-dessus.
+- Course hook prettier / vitest : lancer les tests immédiatement après un Edit peut lire le fichier pendant que le hook le réécrit → erreurs incompréhensibles (`Cannot read properties of undefined (reading 'config')`, "no tests"). Si un run échoue bizarrement juste après une édition, relancer avant de débugger.
