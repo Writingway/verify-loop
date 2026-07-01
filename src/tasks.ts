@@ -7,7 +7,7 @@ export interface Task {
 let nextId = 1;
 
 export function createTask(title: string): Task {
-  if (!title.trim()) throw new Error('title required');
+  if (!title.trim()) throw new Error("title required");
   return { id: nextId++, title: title.trim(), done: false };
 }
 
@@ -17,6 +17,15 @@ export function syncNextId(tasks: Task[]): void {
 
 export function completeTask(task: Task): Task {
   return { ...task, done: true };
+}
+
+export function updateTask(
+  task: Task,
+  changes: { title?: string; done?: boolean },
+): Task {
+  const next = { ...task, ...changes };
+  if (!next.title.trim()) throw new Error("title required");
+  return { ...next, title: next.title.trim() };
 }
 
 export function pending(tasks: Task[]): Task[] {
